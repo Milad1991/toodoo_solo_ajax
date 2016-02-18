@@ -5,11 +5,20 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @tasks = Task.all
+    @task = Task.new
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    if request.xhr?
+      render layout: false,
+      partial: 'task',
+      object: @task
+    else
+      render :show
+    end
+
   end
 
   # GET /tasks/new
